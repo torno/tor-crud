@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Si se accede por IP (192.168.1.170)
+RewriteCond %{HTTP_HOST} ^192\.168\.1\.10$
+RewriteCond %{REQUEST_URI} !^/torcrud/public/
+RewriteRule ^(.*)$ /torwaiter3/public/$1 [L]
+
+# Si se accede por dominio local
+RewriteCond %{HTTP_HOST} ^torcrud\.localhost$
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
