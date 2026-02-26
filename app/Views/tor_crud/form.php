@@ -16,12 +16,13 @@
 
     <!-- Errores generales -->
     <?php if (!empty($data['errors'])): ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">  <!-- AÑADIDO: alert-dismissible -->
             <ul class="mb-0">
                 <?php foreach ($data['errors'] as $error): ?>
                     <li><?= esc($error) ?></li>
                 <?php endforeach; ?>
             </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>  <!-- AÑADIDO: botón cerrar -->
         </div>
     <?php endif; ?>
 
@@ -29,8 +30,11 @@
     <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
         <?= csrf_field() ?>
         
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
+        <div class="card shadow-sm border-0 mb-4">  <!-- AÑADIDO: border-0 -->
+            <div class="card-header bg-light py-3">  <!-- AÑADIDO: bg-light py-3 -->
+                <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Información del registro</h5>  <!-- NUEVO título -->
+            </div>
+            <div class="card-body bg-white">  <!-- AÑADIDO: bg-white -->
                 <div class="row g-3">
                     <?php foreach ($data['fields'] as $field => $attrs): 
                         if (($attrs['hidden_in_form'] ?? false)) continue;
@@ -82,10 +86,10 @@
                                         name="<?= $field ?>" 
                                         id="<?= $field ?>" 
                                         value="1"
-                                        <?= old($field, $value) ? 'checked' : '' ?>>
-                                        <?= $required ? 'required' : '' ?>>
+                                        <?= old($field, $value) ? 'checked' : '' ?>
+                                        <?= $required ? 'required' : '' ?>>  <!-- CORREGIDO: estaba mal cerrado -->
                                     <label class="form-check-label" for="<?= $field ?>">
-                                        <?= '&nbsp;Si/No'; //esc($attrs['label']) ?>
+                                        <?= '&nbsp;Si/No'; ?>
                                     </label>
                                 </div>
                             <?php elseif ($attrs['type'] === 'textarea'): ?>
@@ -117,7 +121,7 @@
                                 <input type="datetime-local" 
                                     class="form-control <?= $errorClass ?>" 
                                     name="<?= $field ?>" 
-                                    value="<?= str_replace(' ', 'T', $value) ?>"
+                                    value="<?= str_replace(' ', 'T', old($field, $value)) ?>"  <!-- CORREGIDO: usar old() -->
                                     <?= $required ? 'required' : '' ?>>    
                             <?php elseif ($attrs['type'] === 'select'): ?>
                                 <select class="form-control select-search" 
@@ -161,7 +165,7 @@
                             <?php elseif ($attrs['type'] === 'file'): ?>
                                 <div class="mb-3">
                                     <?php if (!empty($value) && $data['action'] === 'edit'): ?>
-                                        <div class="mb-2">
+                                        <div class="mb-2 p-2 bg-light rounded">  <!-- AÑADIDO: p-2 bg-light rounded -->
                                             <a href="<?= base_url($attrs['archivo_carpeta_destino'] . '/' . $value) ?>" target="_blank">
                                                 <i class="bi bi-file-earmark"></i> <?= basename($value) ?>
                                             </a>

@@ -30,8 +30,8 @@
     </div>
 
     <!-- Campos en dos columnas -->
-    <div class="card shadow-sm">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">  <!-- AÑADIDO: border-0 para más estilo -->
+        <div class="card-body bg-light">   <!-- AÑADIDO: bg-light para fondo suave -->
             <div class="row g-4">
                 <?php 
                 $count = 0;
@@ -45,7 +45,7 @@
                     
                     <div class="mb-3">
                         <strong class="text-muted small text-uppercase"><?= esc($attrs['label']) ?></strong>
-                        <div class="mt-1">
+                        <div class="mt-1 p-2 bg-white rounded border">  <!-- AÑADIDO: p-2 bg-white rounded border para destacar valores -->
                             <?php if ($attrs['type'] === 'enum' || $attrs['type'] === 'boolean'): ?>
                                 <span class="badge bg-<?= $data['record'][$field . '_clase'] ?? 'secondary' ?>">
                                     <?= $valor ?>
@@ -76,7 +76,7 @@
                                 <?php endif; ?>
                                 
                             <?php elseif ($attrs['type'] === 'wysiwyg'): ?>
-                                <div class="p-2 bg-light rounded">
+                                <div class="p-2 bg-white rounded">  <!-- AÑADIDO: bg-white en lugar de bg-light -->
                                     <?= $valor ?>
                                 </div>
                                 

@@ -44,15 +44,15 @@ class Mi_productos extends BaseController
         $crud->beforeInsert('procesarPrecio'); 
         $crud->afterUpdate('registrarLog');  
 
-        $crud->setWhere([
-            'activo' => 1,
-            'id_categoria' => 2
-        ]);
+       
 
         /*
         $crud->setWhere('activo', 1);
         // Múltiples condiciones
-        
+         $crud->setWhere([
+            'activo' => 1,
+            'id_categoria' => 2
+        ]);
 
         // Con operadores
         $crud->setWhere([
@@ -69,7 +69,7 @@ class Mi_productos extends BaseController
         ]);
         */
 
-        $crud->unsetSearch();
+        //$crud->unsetSearch();
         return $crud->render();
     }
 

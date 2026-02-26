@@ -37,7 +37,7 @@ Tor-Crud es un generador de CRUD que lee la configuración directamente desde la
 - **Auditoría** - Registro de cambios en base de datos externa (opcional).
 - **Seguridad** - Deshabilitar acciones a nivel de controlador (`unsetAdd`, `unsetEdit`, etc.).
 - **Cache de metadatos** - Reducción de consultas a BD.
-
+- **Temas visuales** - Cambie el tema de acuerdo a su panel de control.
 ---
 
 ## 📋 Requisitos

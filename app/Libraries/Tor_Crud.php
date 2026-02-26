@@ -782,6 +782,12 @@ class Tor_Crud
     public function render()
     {
         $output = new \stdClass();
+
+        // ===========================================
+        // CARGAR TEMA GLOBAL (si está configurado)
+        // ===========================================
+        $config = config('TorCrudConfig');
+        
         $output->css = [
             base_url('assets/css/tom-select.min.css'),
             base_url('assets/css/tom-select.bootstrap5.min.css'),
@@ -794,6 +800,10 @@ class Tor_Crud
             base_url('assets/js/tom-select.complete.min.js'),
             base_url('assets/js/tor-crud-form.js')
         ];
+        if (!empty($config->tema)) {
+            $temaPath = $config->rutaTemas . $config->tema;
+            $output->css[] = base_url($temaPath);
+        }
         
         $action = $this->getCurrentAction();
         
@@ -2562,6 +2572,8 @@ public function processInlineEdit($id)
         if (!empty($fieldConfig['validation_rules'])) {
             $rules[$field] = $fieldConfig['validation_rules'];
         }
+
+
         
         if (!empty($rules) && !$validation->setRules($rules)->run([$field => $value])) {
             $errors = $validation->getErrors();
@@ -2575,9 +2587,11 @@ public function processInlineEdit($id)
         
         // Para selects, enums, etc., asegurar que el valor es válido
         if ($fieldConfig['type'] === 'select' || $fieldConfig['type'] === 'enum') {
-            // Verificar que el valor existe en las opciones
-            $opcionesValidas = array_column($fieldConfig['opciones'] ?? [], 'value');
-            if (!in_array($value, $opcionesValidas)) {
+            // Obtener opciones válidas
+            $opcionesValidas = $this->getInlineOptions($field, $fieldConfig);
+            $valoresValidos = array_column($opcionesValidas, 'value');
+            
+            if (!in_array($value, $valoresValidos)) {
                 return $this->jsonResponse(false, 'Valor no válido para este campo');
             }
         }

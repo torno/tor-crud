@@ -217,6 +217,35 @@ if (in_array('2', $options)) {
         echo "\n" . COLOR_YELLOW . "Copiando vistas de auditoría...\n" . COLOR_RESET;
         copyDirectory($auditoriaSource, $auditoriaDest, 'admin/auditoria');
     }
+
+    // Migración de auditoría
+    $auditMigrationFile = $sourceBase . DS . 'Database' . DS . 'Migrations' . DS . 'create_audit_log_table.php';
+    if (file_exists($auditMigrationFile)) {
+        $timestamp = date('Ymd_His', strtotime('+1 second'));
+        $destAuditFile = $destMigrationDir . DS . $timestamp . '_create_audit_log_table.php';
+        copyFile($auditMigrationFile, $destAuditFile, 'Migración de auditoría');
+    }
+
+    // ===========================================
+    // COPIAR TEMAS (BOOTSWATCH)
+    // ===========================================
+    $themesSource = $assetsBase . DS . 'css' . DS . 'themes';
+    $themesDest = $destAssets . DS . 'css' . DS . 'themes';
+
+    if (is_dir($themesSource)) {
+        echo "\n" . COLOR_YELLOW . "Copiando temas visuales...\n" . COLOR_RESET;
+        copyDirectory($themesSource, $themesDest, 'assets/css/themes');
+    }
+
+    // ===========================================
+    // COPIAR CONFIGURACIÓN (TorCrudConfig.php)
+    // ===========================================
+    $configSource = $sourceBase . DS . 'Config' . DS . 'TorCrudConfig.php';
+    $configDest = $destConfig . DS . 'TorCrudConfig.php';
+    if (file_exists($configSource)) {
+        copyFile($configSource, $configDest, 'Config/TorCrudConfig.php');
+    }
+
 }
 
 if (in_array('3', $options)) {
