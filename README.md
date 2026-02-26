@@ -200,3 +200,14 @@ Accede a /admin/gestor-campos y configura tu primera tabla:
 - wysiwyg (editor Quill)
 - virtual_n_a_n (relaciones muchos a muchos)
     
+# 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir qué te gustaría cambiar.
+
+# 📄 Licencia
+
+Este proyecto está licenciado bajo MIT License - ver el archivo LICENSE para más detalles.
+
+# ✍️ Autor
+
+torno - GitHub
