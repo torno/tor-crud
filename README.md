@@ -1,69 +1,61 @@
-# CodeIgniter 4 Application Starter
+# Tor-Crud
 
-## What is CodeIgniter?
+<p align="center">
+    <img src="public/assets/TorCrud Logo.png" alt="Tor-Crud Logo" width="200">
+</p>
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+<p align="center">
+    <strong>Sistema de CRUD dinámico basado en metadatos para CodeIgniter 4</strong>
+</p>
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+<p align="center">
+    <a href="#-características">Características</a> •
+    <a href="#-requisitos">Requisitos</a> •
+    <a href="#-instalación">Instalación</a> •
+    <a href="#-uso-básico">Uso básico</a> •
+    <a href="#-documentación">Documentación</a> •
+    <a href="#-licencia">Licencia</a>
+</p>
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+---
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## ✨ Características
 
-## Installation & updates
+Tor-Crud es un generador de CRUD que lee la configuración directamente desde la base de datos, permitiendo crear interfaces de administración completas sin escribir una sola línea de código por cada tabla.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+### 🔥 Principales funcionalidades
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+- **Gestor de campos visual** - Interfaz para configurar tablas, campos, tipos de control y relaciones.
+- **CRUD automático** - Listado, creación, edición, vista detalle y eliminación desde un solo controlador.
+- **Todos los tipos de campo** - text, number, email, password, textarea, select, enum, boolean, date, datetime, hidden, file, image, wysiwyg.
+- **Relaciones** - 1 a N y N a N con formato personalizable `{campo1} - {campo2}`.
+- **Campos virtuales** - Display (función del controlador) y N a N (tablas intermedias).
+- **Edición en línea** - Doble clic para editar campos directamente en el listado.
+- **Filtros y búsqueda** - Filtros por columna con timer, búsqueda global, persistencia en sesión.
+- **Exportación** - CSV, PDF (con DomPDF) e impresión.
+- **Callbacks** - before/after Insert, Update, Delete, Upload.
+- **Auditoría** - Registro de cambios en base de datos externa (opcional).
+- **Seguridad** - Deshabilitar acciones a nivel de controlador (`unsetAdd`, `unsetEdit`, etc.).
+- **Cache de metadatos** - Reducción de consultas a BD.
 
-## Setup
+---
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## 📋 Requisitos
 
-## Important Change with index.php
+- PHP 8.0 o superior
+- CodeIgniter 4.4 o superior
+- MySQL 5.7+ / MariaDB 10.2+
+- Composer (para dependencias)
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## 🚀 Instalación
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### 1. Usando el instalador (recomendado)
 
-## Repository Management
+```bash
+# Clona o descarga Tor-Crud
+git clone https://github.com/torno/tor-crud.git
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.2 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+# Ejecuta el instalador desde la raíz de tu proyecto CodeIgniter
+php ruta/a/tor-crud/install.php
